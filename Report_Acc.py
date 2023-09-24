@@ -16,9 +16,13 @@ def test():
     df_today_dist_AC = df_today[df_today["差異原因"] == "[AC無資料]、[結算時間]"]
     df_today_settlement = df_today[(df_today["差異原因"] == "[結帳日]") | (df_today["差異原因"] == "[手續費]、[結帳日]")]
 
-    df_other = df_today[(df_today["差異原因"] != "[收單行無資料]、[結算時間]") & (df_yesterday["差異原因"] != "[AC無資料]、[結算時間]") & (df_today["差異原因"] != "[結帳日]") & (df_today["差異原因"] != "[手續費]、[結帳日]") & (df_today["差異原因"] != "[手續費]") & (df_today["差異原因"] != "[X] AC無資料、[Inline交易]")]
+    df_other = df_today[(df_today["差異原因"] != "[收單行無資料]、[結算時間]") & (
+                df_yesterday["差異原因"] != "[AC無資料]、[結算時間]") & (df_today["差異原因"] != "[結帳日]") & (
+                                    df_today["差異原因"] != "[手續費]、[結帳日]") & (
+                                    df_today["差異原因"] != "[手續費]") & (
+                                    df_today["差異原因"] != "[X] AC無資料、[Inline交易]")]
     # 排除手續費 + 手續費交易日 + 收單行無資料結算時間 + AC無資料結算時間 + 結帳日 + 手續費結帳日
-    df_other.to_csv("Output.csv") # AC無資料 + 其他異常會寫入
+    df_other.to_csv("Output.csv")  # AC無資料 + 其他異常會寫入
 
     if len(df_today_dist_AC_bank) != 0: distinguish_bank_no_data(df_today_dist_AC_bank, df_yesterday)
     if len(df_today_dist_AC) != 0: distinguish_AC_no_data(df_today_dist_AC, df_yesterday_Bank)
