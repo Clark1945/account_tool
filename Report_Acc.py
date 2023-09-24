@@ -20,7 +20,6 @@ def test():
     if len(df_today_dist_AC) != 0: distinguish_AC_no_data(df_today_dist_AC, df_yesterday_Bank)
     distinguish_settlement(df_today_settlement)
 
-
 # 判斷AC無資料、結算時間
 def distinguish_AC_no_data(df_today, df_yesterday):
     df_today = df_today.copy()
